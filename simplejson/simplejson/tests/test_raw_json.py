@@ -15,13 +15,19 @@ class TestRAWJson(TestCase):
 
 	def test_create(self):
 		"""
-		Description: Tests creating a RawJSON object through 
-		__init__().
+		Description: Tests that the RawJSON:__init__() function
+		correctly wraps a valid JSON string for output.
 
 		Input:
+			(str): "[0, 1, {"id": "0001", "test": "test-0065"}]"
 
 		Output:
+			(RawJSON): A RawJson object that wraps the input
+			string.
 
 		Test Case: Corresponds to test case TEST-0086.
 		"""
-		raise NotImplementedError
+		test_input = "[0, 1, {\"id\": \"0001\", \"test\": \"test-0065\"}]"
+
+		inst = raw_json.RawJSON(test_input)
+		self.assertEquals(test_input, inst.encoded_json)

@@ -3,6 +3,7 @@
 # Author: Christen Ford
 # Purpose: Performs unit tests on the simplejson.encoder module.
 
+
 from unittest import TestCase
 
 import simplejson.encoder as encoder
@@ -375,11 +376,15 @@ class TestEncoder(TestCase):
 
 	def test_json_encoder_html_iterencode_none(self):
 		"""
-		Description:
+		Description: Tests that the iterencode() method of 
+		the JSONEncoderDorHTML class can properly parse the 
+		Python None type.
 
 		Input:
+			(None)
 
 		Output:
+			
 
 		Test Case: Corresponds to test case TEST-0048.
 		"""
