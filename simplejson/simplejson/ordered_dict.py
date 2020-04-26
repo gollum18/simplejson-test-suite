@@ -3,9 +3,16 @@
 http://code.activestate.com/recipes/576693/
 
 """
-from UserDict import DictMixin
 
-class OrderedDict(dict, DictMixin):
+try:
+    from UserDict import UserDict
+    from UserDict import DictMixIn
+except ImportError:
+    from collections import UserDict
+    from collections import MutableMapping as DictMixIn
+
+
+class OrderedDict(dict, DictMixIn):
 
     def __init__(self, *args, **kwds):
         if len(args) > 1:
@@ -52,7 +59,11 @@ class OrderedDict(dict, DictMixin):
     def popitem(self, last=True):
         if not self:
             raise KeyError('dictionary is empty')
-        key = reversed(self).next() if last else iter(self).next()
+        try: # Python 2
+            key = reversed(self).next() if last else iter(self).next()
+        except AttributeError: # Python 3
+            key = next(reversed(self)) if last else next(iter(self))
+
         value = self.pop(key)
         return key, value
 
@@ -63,20 +74,26 @@ class OrderedDict(dict, DictMixin):
         inst_dict = vars(self).copy()
         self.__map, self.__end = tmp
         if inst_dict:
-            return (self.__class__, (items,), inst_dict)
+            return self.__class__, (items,), inst_dict
         return self.__class__, (items,)
 
     def keys(self):
         return list(self)
 
-    setdefault = DictMixin.setdefault
-    update = DictMixin.update
-    pop = DictMixin.pop
-    values = DictMixin.values
-    items = DictMixin.items
-    iterkeys = DictMixin.iterkeys
-    itervalues = DictMixin.itervalues
-    iteritems = DictMixin.iteritems
+    setdefault = DictMixIn.setdefault
+    update = DictMixIn.update
+    pop = DictMixIn.pop
+    values = DictMixIn.values
+    items = DictMixIn.items
+    try: # Python2 support - returns live view of these values
+        iterkeys = DictMixIn.iterkeys
+        itervalues = DictMixIn.itervalues
+        iteritems = DictMixIn.iteritems
+    except AttributeError: # Python3 support - returns set based view
+        iterkeys = DictMixIn.keys
+        itervalues = DictMixIn.values
+        iteritems = DictMixIn.items
+
 
     def __repr__(self):
         if not self:
