@@ -43,6 +43,7 @@ def all_tests_suite():
         ]
         return additional_tests(
             unittest.TestLoader().loadTestsFromNames(suite_names))
+
     suite = get_suite()
     import simplejson
     suite = unittest.TestSuite([
@@ -61,5 +62,6 @@ def main():
 if __name__ == '__main__':
     import os
     import sys
+
     sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
     main()

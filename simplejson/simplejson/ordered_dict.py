@@ -9,7 +9,7 @@ try:
     from UserDict import DictMixIn
 except ImportError:
     from collections import UserDict
-    from collections import MutableMapping as DictMixIn
+    from collections.abc import MutableMapping as DictMixIn
 
 
 class OrderedDict(dict, DictMixIn):
@@ -97,8 +97,8 @@ class OrderedDict(dict, DictMixIn):
 
     def __repr__(self):
         if not self:
-            return '%s()' % (self.__class__.__name__,)
-        return '%s(%r)' % (self.__class__.__name__, self.items())
+            return self.__class__.__name__
+        return self.__class__.__name__
 
     def copy(self):
         return self.__class__(self)
