@@ -62,16 +62,15 @@ class TestErrors(TestCase):
         error message given correct parameters.
 
         Input:
-            (str, str, int): ("Invalid closing brace!", "[}" ,"1")
+            (str, str, int): ("Invalid closing brace!", "[}", 1)
 
         Output:
             (str): A formatted error message.
 
         Test Case: Corresponds to test case TEST-0051.
         """
-        test_input = ["Invalid closing brace!", "[}", "1"]
+        test_input = ["Invalid closing brace!", "[}", 1]
         self.assertIsInstance(errors.errmsg(*test_input), str)
-        # TODO: Test the format
 
 
     def test_errmsg_iindex(self):
@@ -111,7 +110,7 @@ class TestErrors(TestCase):
         """
         test_input = ["Invalid closing brace!", "[}", 1]
         err = errors.JSONDecodeError(*test_input)
-        self.assertIsInstance(err, str)
+        self.assertIsInstance(err, errors.JSONDecodeError)
 
 
     def test_create_iindex(self):

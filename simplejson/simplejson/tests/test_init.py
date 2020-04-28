@@ -7,11 +7,6 @@
 # Purpose: Performs unit testing on the simplejson.__init__
 #	module.
 
-# TODO:
-"""
-	-- Figure out an invalid Python object for TEST-0057/0060.
-"""
-
 import os, pathlib
 from unittest import TestCase
 

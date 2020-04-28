@@ -53,7 +53,7 @@ class TestDecoder(TestCase):
 
         Test Case: Corresponds to test TEST-0001.
         """
-        test_inputs = ('"{]"', '"[}"')
+        test_inputs = ('{]', '[}')
         for test_input in test_inputs:
             self.assertRaises(
                 decoder.JSONDecodeError,
@@ -76,7 +76,7 @@ class TestDecoder(TestCase):
 
         Test Case: Corresponds to test TEST-0002.
         """
-        test_input = '""'
+        test_input = ''
         self.assertRaises(
             errors.JSONDecodeError,
             decoder.py_scanstring,

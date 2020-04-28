@@ -6,9 +6,7 @@
 # NOTES:
 """
     -- Removed test cases 0027 to 0039 as it is impossible to test
-    nested functions in Pythons unittest environment. I have merged them
-    into test case 0026 as those test cases concern testing nested functions
-    of the make_iterencode function.
+    nested functions in Pythons unittest environment.
 """
 
 from decimal import Decimal, getcontext
